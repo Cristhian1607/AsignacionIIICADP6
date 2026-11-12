@@ -1,0 +1,19 @@
+{
+  "info": {
+    "name": "Asignación III - API de inventario",
+    "description": "Pruebas de los cinco endpoints CRUD y de las respuestas de validación de la API local.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }, { "key": "productoId", "value": "" }],
+  "item": [
+    { "name": "Health", "request": { "method": "GET", "url": "{{baseUrl}}/health" } },
+    { "name": "GET - listar productos", "request": { "method": "GET", "url": "{{baseUrl}}/api/productos" } },
+    { "name": "POST - crear producto", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Teclado mecánico\",\n  \"descripcion\": \"Teclado USB con distribución en español\",\n  \"categoria\": \"Accesorios\",\n  \"precio\": 25990.50,\n  \"cantidad\": 12,\n  \"estado\": true\n}" }, "url": "{{baseUrl}}/api/productos" }, "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["if (pm.response.code === 201) {", "  const body = pm.response.json();", "  pm.collectionVariables.set('productoId', body.producto._id);", "}"] } }] },
+    { "name": "GET - consultar por id", "request": { "method": "GET", "url": "{{baseUrl}}/api/productos/{{productoId}}" } },
+    { "name": "PUT - actualizar producto", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"precio\": 24990.00,\n  \"cantidad\": 10\n}" }, "url": "{{baseUrl}}/api/productos/{{productoId}}" } },
+    { "name": "POST - validación (precio negativo)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Producto inválido\",\n  \"descripcion\": \"Debe responder 400\",\n  \"categoria\": \"Prueba\",\n  \"precio\": -5,\n  \"cantidad\": 2\n}" }, "url": "{{baseUrl}}/api/productos" } },
+    { "name": "GET - id inválido (400)", "request": { "method": "GET", "url": "{{baseUrl}}/api/productos/id-invalido" } },
+    { "name": "GET - id válido inexistente (404)", "request": { "method": "GET", "url": "{{baseUrl}}/api/productos/000000000000000000000000" } },
+    { "name": "DELETE - eliminar producto", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/productos/{{productoId}}" } }
+  ]
+}

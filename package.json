@@ -1,0 +1,25 @@
+{
+  "name": "asignacion_iii_node_express_mongoose",
+  "version": "1.0.0",
+  "description": "API REST de inventario con Node.js, Express, Mongoose y MongoDB para la Asignación III de Programación de Computadoras II.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node --use-system-ca src/server.js",
+    "dev": "nodemon --exec \"node --use-system-ca\" src/server.js",
+    "test": "node --test"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "mongoose": "^9.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "supertest": "^7.3.2"
+  }
+}
